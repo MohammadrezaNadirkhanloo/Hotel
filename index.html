@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.ico" />
+    <link rel="stylesheet" href="./src/Style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Mohammadreza Nadirkhanloo" />
+    <meta
+      name="author"
+      content="Mohammadreza Nadirkhanloo , m.nadirkhanloo1380@gmail.com"
+    />
+    <title>Hotel Nadirkhanloo</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.onblur = function () {
+        document.title = "Khanloo 👋";
+      };
+
+      window.onfocus = function () {
+        document.title = "Hotel Nadirkhanloo";
+      };
+    </script>
+  </body>
+</html>
