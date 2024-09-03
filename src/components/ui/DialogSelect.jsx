@@ -1,7 +1,7 @@
 import BedIcon from "@mui/icons-material/Bed";
 import BoyIcon from "@mui/icons-material/Boy";
 import ManIcon from "@mui/icons-material/Man";
-import { Slide, Typography } from "@mui/material";
+import { ListSubheader, Slide, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -21,19 +21,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogSelect() {
   const [open, setOpen] = React.useState(false);
-  const [adult, setAdult] = React.useState("");
+  const [adult, setAdult] = React.useState("1");
   const [children, setChildren] = React.useState("");
-  const [room, setRoom] = React.useState("");
-
-  const handleChangeAdult = (event) => {
-    setAdult(Number(event.target.value) || "");
-  };
-  const handleChangeChildren = (event) => {
-    setChildren(Number(event.target.value) || "");
-  };
-  const handleChangeRoom = (event) => {
-    setRoom(Number(event.target.value) || "");
-  };
+  const [room, setRoom] = React.useState("1");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,10 +36,14 @@ export default function DialogSelect() {
   return (
     <React.Fragment>
       <Button onClick={handleClickOpen}>
-        <Typography sx={{ display: "flex", gap: 1 }} component={'span'} variant={'body2'} >
+        <Typography
+          sx={{ display: "flex", gap: 1 }}
+          component={"span"}
+          variant={"body2"}
+        >
           <Box>
             <ManIcon />
-            {adult || 0} |
+            {adult} |
           </Box>
           <Box>
             {" "}
@@ -58,7 +52,7 @@ export default function DialogSelect() {
           </Box>
           <Box>
             {" "}
-            <BedIcon sx={{mx:"2px"}} />
+            <BedIcon sx={{ mx: "2px" }} />
             {room || 0}
           </Box>
         </Typography>
@@ -79,12 +73,12 @@ export default function DialogSelect() {
                 labelId="adult"
                 id="demo-dialog-select"
                 value={adult}
-                onChange={handleChangeAdult}
+                onChange={(event) => {
+                  setAdult(Number(event.target.value));
+                }}
                 input={<OutlinedInput label="adult" />}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>{" "}
+                <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
                 <MenuItem value={4}>4</MenuItem>
@@ -98,7 +92,9 @@ export default function DialogSelect() {
                 labelId="children"
                 id="demo-dialog-select"
                 value={children}
-                onChange={handleChangeChildren}
+                onChange={(event) => {
+                  setChildren(Number(event.target.value));
+                }}
                 input={<OutlinedInput label="Children" />}
               >
                 <MenuItem value="">
@@ -116,15 +112,15 @@ export default function DialogSelect() {
                 labelId="Room"
                 id="demo-dialog-select"
                 value={room}
-                onChange={handleChangeRoom}
+                onChange={(event) => {
+                  setRoom(Number(event.target.value));
+                }}
                 input={<OutlinedInput label="Room" />}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
+                <ListSubheader >4</ListSubheader>
               </Select>
             </FormControl>
           </Box>
