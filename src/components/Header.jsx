@@ -24,7 +24,7 @@ export default function Header() {
               <MenuIcon />
             </IconButton>
             <Box
-              sx={{
+              sx={{ 
                 flexGrow: 1,
                 display: "flex",
                 justifyContent: "space-around",
