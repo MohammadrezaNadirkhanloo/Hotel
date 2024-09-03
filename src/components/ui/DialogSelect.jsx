@@ -18,7 +18,7 @@ export default function DialogSelect() {
 
   const handleChange = (event) => {
     setAge(Number(event.target.value) || "");
-  };
+  }; 
 
   const handleClickOpen = () => {
     setOpen(true);
