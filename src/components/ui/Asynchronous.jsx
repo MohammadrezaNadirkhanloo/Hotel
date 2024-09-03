@@ -16,7 +16,7 @@ export default function Asynchronous() {
   const [options, setOptions] = React.useState([]);
   const loading = open && options.length === 0;
 
-  React.useEffect(() => {
+  React.useEffect(() => { 
     let active = true;
 
     if (!loading) {
