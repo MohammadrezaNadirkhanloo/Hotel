@@ -9,12 +9,19 @@ import useFetch from "../hook/useFetch";
 function ListItem() {
   const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");
   if (isLoading) <p>loading</p>;
+  const style = {
+    borderRadius: 4,
+    cursor: "pointer",
+    " :hover": {
+      color: "green",
+    },
+  };
   return (
     <Container>
-      <Grid container spacing={5} sx={{ mt: 5 }}>
+      <Grid container spacing={4} sx={{ mt: 5 }}>
         {data.map((item) => (
-          <Grid key={item.id} size={4}>
-            <Card key={item.id} sx={{ maxWidth: 345 }}>
+          <Grid key={item.id} size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Card key={item.id} sx={style}>
               <CardMedia
                 component="img"
                 alt={item.name}
@@ -28,7 +35,7 @@ function ListItem() {
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   {item.name}
                 </Typography>
-                <Typography variant="body1">{item.price}</Typography>
+                <Typography variant="body1">€{item.price}</Typography>
               </CardContent>
             </Card>
           </Grid>
