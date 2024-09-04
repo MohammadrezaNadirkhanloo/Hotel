@@ -22,3 +22,22 @@
 body {
   background-color:#0f1214;
 }
+
+.rdrDateDisplayWrapper {
+  background-color: #272727;
+  
+}
+
+.rdrCalendarWrapper{
+  background-color: #272727;
+  
+}
+
+.rdrDayDisabled{
+  background-color: #424242;
+  border-radius: 45px;
+}
+
+.rdrDayNumber span{
+  color: white;
+}
