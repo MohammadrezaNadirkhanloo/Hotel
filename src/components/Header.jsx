@@ -8,8 +8,8 @@ import Toolbar from "@mui/material/Toolbar";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Daterange from "./Date";
-import Asynchronous from "./ui/Asynchronous";
 import DialogSelect from "./ui/DialogSelect";
+import InputWithIcon from "./ui/InputWithIcon";
 
 export default function Header() {
   return (
@@ -34,7 +34,7 @@ export default function Header() {
                 alignItems: "center",
               }}
             >
-              <Asynchronous />
+              <InputWithIcon />
               <Box>
                 {/* <CalendarMonthIcon color="primary" />
                 2020/55/55 */}
