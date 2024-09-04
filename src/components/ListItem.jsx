@@ -7,13 +7,13 @@ import Typography from "@mui/material/Typography";
 import useFetch from "../hook/useFetch";
 
 function ListItem() {
-  const { data, isLoading } = useFetch(" http://localhost:5000", "");
+  const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");
   if (isLoading) <p>loading</p>;
   return (
     <Container>
       <Grid container spacing={5} sx={{ mt: 5 }}>
-        {data.map((item) => {
-          <Grid size={4}>
+        {data.map((item) => (
+          <Grid key={item.id} size={4}>
             <Card key={item.id} sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
@@ -31,8 +31,8 @@ function ListItem() {
                 <Typography variant="body1">{item.price}</Typography>
               </CardContent>
             </Card>
-          </Grid>;
-        })}
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
