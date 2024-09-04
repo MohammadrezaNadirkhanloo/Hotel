@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
-export default function useFetch(search = "", url) {
+export default function useFetch(url, query = "") {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,7 +10,7 @@ export default function useFetch(search = "", url) {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const { data } = await axios.get(`${url}?${search}`);
+        const { data } = await axios.get(`${url}?${query}`);
         setData(data);
       } catch (err) {
         setData([]);
@@ -19,8 +19,9 @@ export default function useFetch(search = "", url) {
         setIsLoading(false);
       }
     }
-    fetchData();
-  }, [search, url]);
 
-  return { data, isLoading };
+    fetchData();
+  }, [query, url]);
+
+  return { isLoading, data };
 }
