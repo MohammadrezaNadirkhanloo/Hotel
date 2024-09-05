@@ -1,14 +1,18 @@
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import useFetch from "../hook/useFetch";
+import Skeleton from "@mui/material/Skeleton";
 
 function ListItem() {
   const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");
-  if (isLoading) <p>loading</p>;
+  if (isLoading)
+    <Box>
+      <Skeleton animation="wave" width={150} />
+    </Box>;
   const style = {
     borderRadius: 4,
     cursor: "pointer",
