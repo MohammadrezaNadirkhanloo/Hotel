@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { Theme } from "./components/ui/Theme";
 import { Toaster } from "react-hot-toast";
 import ListItem from "./components/ListItem";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <ThemeProvider theme={Theme}>
         <Toaster />
         <Header />
-        <ListItem />
+        <Routes>
+          <Route path="/Hotel" element={<ListItem />} />
+        </Routes>
       </ThemeProvider>
     </>
   );
