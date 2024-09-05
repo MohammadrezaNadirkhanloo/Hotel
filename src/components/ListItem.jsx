@@ -11,7 +11,7 @@ function ListItem() {
   const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");
   if (isLoading)
     <Box>
-      <Skeleton animation="wave" width={150} />
+      <Skeleton animation="wave" width={150} height={20} />
     </Box>;
   const style = {
     borderRadius: 4,
@@ -25,7 +25,7 @@ function ListItem() {
       <Grid container spacing={4} sx={{ mt: 5 }}>
         {data.map((item) => (
           <Grid key={item.id} size={{ xs: 12, sm: 6, lg: 4 }}>
-            <Card key={item.id} sx={style}>
+            <Card sx={style}>
               <CardMedia
                 component="img"
                 alt={item.name}
