@@ -3,18 +3,9 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import { format } from "date-fns";
 import * as React from "react";
-import { useState } from "react";
 import { DateRange } from "react-date-range";
 
-function Daterange() {
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-      color:"green"
-    },
-  ]);
+function Daterange({ date, setDate }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -31,7 +22,10 @@ function Daterange() {
   return (
     <>
       <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        {`${format(date[0].startDate,"MM/dd/yyyy")} to ${format(date[0].endDate,"MM/dd/yyyy")}`}
+        {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+          date[0].endDate,
+          "MM/dd/yyyy"
+        )}`}
       </Button>
       <Popover
         id={id}
