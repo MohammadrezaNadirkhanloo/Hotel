@@ -21,9 +21,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogSelect() {
   const [open, setOpen] = React.useState(false);
-  const [adult, setAdult] = React.useState("1");
-  const [children, setChildren] = React.useState("");
-  const [room, setRoom] = React.useState("1");
+  const [options, setOptions] = React.useState({
+    adult: 1,
+    children: 0,
+    room: 1,
+  });
+
+  const handelChange = (name, number) => {
+    setOptions((perv) => {
+      return {
+        ...perv,
+        [name]: number,
+      };
+    });
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,17 +54,17 @@ export default function DialogSelect() {
         >
           <Box>
             <ManIcon />
-            {adult} |
+            {options.adult} |
           </Box>
           <Box>
             {" "}
             <BoyIcon />
-            {children || 0} |
+            {options.children} |
           </Box>
           <Box>
             {" "}
             <BedIcon sx={{ mx: "2px" }} />
-            {room || 0}
+            {options.room}
           </Box>
         </Typography>
       </Button>
@@ -67,62 +78,24 @@ export default function DialogSelect() {
         <DialogTitle>Fill the form</DialogTitle>
         <DialogContent>
           <Box component="form" sx={{ display: "flex", flexWrap: "wrap" }}>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="adult">adult</InputLabel>
-              <Select
-                labelId="adult"
-                id="demo-dialog-select"
-                value={adult}
-                onChange={(event) => {
-                  setAdult(Number(event.target.value));
-                }}
-                input={<OutlinedInput label="adult" />}
-              >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={6}>6</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="children">Children</InputLabel>
-              <Select
-                labelId="children"
-                id="demo-dialog-select"
-                value={children}
-                onChange={(event) => {
-                  setChildren(Number(event.target.value));
-                }}
-                input={<OutlinedInput label="Children" />}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="Room">Room</InputLabel>
-              <Select
-                labelId="Room"
-                id="demo-dialog-select"
-                value={room}
-                onChange={(event) => {
-                  setRoom(Number(event.target.value));
-                }}
-                input={<OutlinedInput label="Room" />}
-              >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <ListSubheader >4</ListSubheader>
-              </Select>
-            </FormControl>
+            <FormSelect
+              type="adult"
+              options={options}
+              handelChange={handelChange}
+              maxlim={6}
+            />
+            <FormSelect
+              type="children"
+              options={options}
+              handelChange={handelChange}
+              maxlim={4}
+            />
+            <FormSelect
+              type="room"
+              options={options}
+              handelChange={handelChange}
+              maxlim={3}
+            />
           </Box>
         </DialogContent>
         <DialogActions>
@@ -130,5 +103,37 @@ export default function DialogSelect() {
         </DialogActions>
       </Dialog>
     </React.Fragment>
+  );
+}
+
+function FormSelect({ type, options, handelChange, maxlim }) {
+  let number = [];
+  for (let index = 1; index <= maxlim; index++) {
+    number = [...number, index];
+  }
+  return (
+    <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id={type}>{type}</InputLabel>
+      <Select
+        labelId={type}
+        id="demo-dialog-select"
+        value={options[type]}
+        onChange={(e) => handelChange(type, Number(e.target.value))}
+        input={<OutlinedInput label={type} />}
+      >
+        {type === "children" ? (
+          <MenuItem value="0">
+            <em>0</em>
+          </MenuItem>
+        ) : (
+          ""
+        )}
+        {number.map((item) => (
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 }
