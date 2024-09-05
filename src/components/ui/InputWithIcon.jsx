@@ -1,11 +1,8 @@
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
 
-export default function InputWithIcon() {
-  const [value, setValue] = useState("");
-
+export default function InputWithIcon({ value, setValue }) {
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
