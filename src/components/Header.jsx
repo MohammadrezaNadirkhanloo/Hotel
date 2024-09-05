@@ -10,11 +10,17 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import Daterange from "./Date";
 import DialogSelect from "./ui/DialogSelect";
 import InputWithIcon from "./ui/InputWithIcon";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import {
+  createSearchParams,
+  Outlet,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useState } from "react";
 
 export default function Header() {
-  const [value, setValue] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState(searchParams.get("value") || "");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -38,7 +44,7 @@ export default function Header() {
     });
 
     navigate({
-      pathname: "/hotels",
+      pathname: "filter",
       search: encodeParams.toString(),
     });
   };
@@ -82,6 +88,7 @@ export default function Header() {
           </Toolbar>
         </Container>
       </AppBar>
+      <Outlet />
     </Box>
   );
 }
