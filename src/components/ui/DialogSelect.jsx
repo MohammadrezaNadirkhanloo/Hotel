@@ -1,7 +1,7 @@
 import BedIcon from "@mui/icons-material/Bed";
 import BoyIcon from "@mui/icons-material/Boy";
 import ManIcon from "@mui/icons-material/Man";
-import { ListSubheader, Slide, Typography } from "@mui/material";
+import { Slide, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -19,14 +19,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DialogSelect() {
+export default function DialogSelect({ options, setOptions }) {
   const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
-
   const handelChange = (name, number) => {
     setOptions((perv) => {
       return {
