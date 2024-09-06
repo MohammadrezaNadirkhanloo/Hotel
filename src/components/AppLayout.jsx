@@ -1,6 +1,7 @@
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Outlet } from "react-router-dom";
+import Map from "./Map";
 
 function AppLayout() {
   return (
@@ -10,7 +11,7 @@ function AppLayout() {
           <Outlet />
         </Grid>
         <Grid size={7}>
-          <p>map</p>
+          <Map />
         </Grid>
       </Grid>
     </Container>

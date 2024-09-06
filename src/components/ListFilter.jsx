@@ -4,21 +4,13 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import useFetch from "../hook/useFetch";
+import { useNavigate } from "react-router-dom";
+import { useFilterHotel } from "./context/ListFilterProvider";
 
 function ListFilter() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const valueSearch = searchParams.get("value");
-  const filterNumber = JSON.parse(searchParams.get("options"));
+  const { hotels, isLoading } = useFilterHotel();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useFetch(
-    "http://localhost:5000/hotels",
-    `host_location_like=${valueSearch || ""}&accommodates_gte=${
-      filterNumber.room || 1
-    }`
-  );
   const handelId = (item) => {
     navigate(`${item.id}?lat=${item.latitude}&lng=${item.longitude}`);
   };
@@ -26,9 +18,9 @@ function ListFilter() {
   return (
     <Box>
       <Typography variant="h5" component="div" color="primary">
-        Search Results({data.length})
+        Search Results({hotels.length})
       </Typography>
-      {data.map((item) => (
+      {hotels.map((item) => (
         <Card key={item.id} sx={{ mb: 2, maxWidth: 395 }}>
           <CardActionArea
             onClick={() => handelId(item)}
