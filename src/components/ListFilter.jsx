@@ -4,12 +4,21 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
-import { useFilterHotel } from "./context/ListFilterProvider";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import useFetch from "../hook/useFetch";
 
 function ListFilter() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const valueSearch = searchParams.get("value");
+  const filterNumber = JSON.parse(searchParams.get("options"));
   const navigate = useNavigate();
-  const { data, isLoading } = useFilterHotel();
+
+  const { data, isLoading } = useFetch(
+    "http://localhost:5000/hotels",
+    `host_location_like=${valueSearch || ""}&accommodates_gte=${
+      filterNumber.room || 1
+    }`
+  );
   const handelId = (item) => {
     navigate(`${item.id}?lat=${item.latitude}&lng=${item.longitude}`);
   };
