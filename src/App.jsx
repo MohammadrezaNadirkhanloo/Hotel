@@ -6,30 +6,27 @@ import ListItem from "./components/ListItem";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import ListFilter from "./components/ListFilter";
+import ListFilterProvider from "./components/context/ListFilterProvider";
 
 function App() {
   return (
     <>
       <ThemeProvider theme={Theme}>
-        <Toaster />
-        <Routes>
-          <Route path="/Hotel" element={<Header />}>
-            <Route index element={<ListItem />} />
-            <Route path="filter" element={<AppLayout />}>
-              <Route index element={<ListFilter />} />
-              <Route
-                path=":id"
-                element={<div>singel hotelddddddddddddddddd</div>}
-              />
+        <ListFilterProvider>
+          <Toaster />
+          <Routes>
+            <Route path="/Hotel" element={<Header />}>
+              <Route index element={<ListItem />} />
+              <Route path="filter" element={<AppLayout />}>
+                <Route index element={<ListFilter />} />
+                <Route
+                  path=":id"
+                  element={<div>singel hotelddddddddddddddddd</div>}
+                />
+              </Route>
             </Route>
-          </Route>
-
-          {/* <ListItem /> */}
-          {/* <Route path="/filter" element={<AppLayout />}>
-            
-            <Route path=":id" element={<div>singel hotelddddddddddddddddd</div>} />
-          </Route> */}
-        </Routes>
+          </Routes>
+        </ListFilterProvider>
       </ThemeProvider>
     </>
   );
