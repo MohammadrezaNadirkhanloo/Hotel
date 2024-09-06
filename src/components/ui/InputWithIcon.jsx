@@ -13,6 +13,7 @@ export default function InputWithIcon({ value, setValue }) {
           variant="standard"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          autoComplete='off'
         />
       </Box>
     </Box>
