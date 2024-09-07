@@ -11,9 +11,9 @@ import ListFilterProvider from "./components/context/ListFilterProvider";
 function App() {
   return (
     <>
-      <ListFilterProvider>
-        <ThemeProvider theme={Theme}>
-          <Toaster />
+      <ThemeProvider theme={Theme}>
+        <Toaster />
+        <ListFilterProvider>
           <Routes>
             <Route path="/Hotel" element={<Header />}>
               <Route index element={<ListItem />} />
@@ -26,8 +26,8 @@ function App() {
               </Route>
             </Route>
           </Routes>
-        </ThemeProvider>
-      </ListFilterProvider>
+        </ListFilterProvider>
+      </ThemeProvider>
     </>
   );
 }
