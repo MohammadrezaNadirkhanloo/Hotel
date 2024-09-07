@@ -1,7 +1,11 @@
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { useFilterHotel } from "./context/ListFilterProvider";
 import { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { useSearchParams } from "react-router-dom";
+import { useFilterHotel } from "./context/ListFilterProvider";
+import useGeoLocation from "../hook/useGeoLocation";
+import LoadingButton from "@mui/lab/LoadingButton";
+import GpsFixedIcon from "@mui/icons-material/GpsFixed";
+import { Box } from "@mui/material";
 
 function Map() {
   const { hotels, isLoading } = useFilterHotel();
@@ -9,12 +13,24 @@ function Map() {
   const [searchParams, setSearchParams] = useSearchParams();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
+  const {
+    isLoading: isLoadingPosition,
+    position,
+    getPosition,
+  } = useGeoLocation();
   useEffect(() => {
     if (lat && lng) setfirst([lat, lng]);
   }, [lat, lng]);
 
   return (
-    <div>
+    <Box>
+      <LoadingButton
+        size="small"
+        onClick={getPosition}
+        loading={isLoadingPosition}
+        loadingPosition="start"
+        startIcon={<GpsFixedIcon />}
+      ></LoadingButton>
       <MapContainer
         center={first}
         zoom={7}
@@ -32,7 +48,7 @@ function Map() {
           </Marker>
         ))}
       </MapContainer>
-    </div>
+    </Box>
   );
 }
 
