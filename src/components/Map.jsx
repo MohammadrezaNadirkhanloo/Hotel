@@ -2,8 +2,15 @@ import GpsFixedIcon from "@mui/icons-material/GpsFixed";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { useSearchParams } from "react-router-dom";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvent,
+} from "react-leaflet";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useGeoLocation from "../hook/useGeoLocation";
 import { useFilterHotel } from "./context/ListFilterProvider";
 
@@ -45,6 +52,7 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <DetectClick />
         <ChangeCenter position={first} />
         {hotels.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
@@ -56,10 +64,17 @@ function Map() {
   );
 }
 
+export default Map;
+
 function ChangeCenter({ position }) {
   const map = useMap();
   map.setView(position);
   return null;
 }
 
-export default Map;
+function DetectClick() {
+  const navigate = useNavigate();
+  useMapEvent({
+    click: (e) => navigate(`/Hotel/bookmark?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+  });
+}
