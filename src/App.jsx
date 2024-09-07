@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import ListFilter from "./components/ListFilter";
 import ListFilterProvider from "./components/context/ListFilterProvider";
+import Item from "./components/Item";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
                 <Route index element={<ListFilter />} />
                 <Route
                   path=":id"
-                  element={<div>singel hotelddddddddddddddddd</div>}
+                  element={<Item />}
                 />
               </Route>
             </Route>

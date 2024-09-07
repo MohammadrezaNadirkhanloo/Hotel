@@ -5,7 +5,7 @@ import Map from "./Map";
 
 function AppLayout() {
   return (
-    <Container>
+    <Container sx={{mt:4}}>
       <Grid container>
         <Grid size={5}>
           <Outlet />
