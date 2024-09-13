@@ -12,6 +12,7 @@ import DialogSelect from "./ui/DialogSelect";
 import InputWithIcon from "./ui/InputWithIcon";
 import {
   createSearchParams,
+  Link,
   Outlet,
   useNavigate,
   useSearchParams,
@@ -72,8 +73,6 @@ export default function Header() {
             >
               <InputWithIcon value={value} setValue={setValue} />
               <Box>
-                {/* <CalendarMonthIcon color="primary" />
-                2020/55/55 */}
                 <Daterange date={date} setDate={setDate} />
               </Box>
               <DialogSelect options={options} setOptions={setOptions} />
@@ -85,6 +84,7 @@ export default function Header() {
                 <SavedSearchIcon color="primary" fontSize="inherit" />
               </IconButton>
             </Box>
+            <Link to="bookmark">boork</Link>
           </Toolbar>
         </Container>
       </AppBar>
