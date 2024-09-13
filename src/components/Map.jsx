@@ -12,10 +12,8 @@ import {
 } from "react-leaflet";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useGeoLocation from "../hook/useGeoLocation";
-import { useFilterHotel } from "./context/ListFilterProvider";
 
-function Map() {
-  const { hotels, isLoading } = useFilterHotel();
+function Map({ markdown }) {
   const [first, setfirst] = useState([51, 3]);
   const [searchParams, setSearchParams] = useSearchParams();
   const lat = searchParams.get("lat");
@@ -54,7 +52,7 @@ function Map() {
         />
         <DetectClick />
         <ChangeCenter position={first} />
-        {hotels.map((item) => (
+        {markdown.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
             <Popup>{item.name}</Popup>
           </Marker>
@@ -75,6 +73,7 @@ function ChangeCenter({ position }) {
 function DetectClick() {
   const navigate = useNavigate();
   useMapEvent({
-    click: (e) => navigate(`/Hotel/bookmark?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+    click: (e) =>
+      navigate(`/Hotel/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
 }
