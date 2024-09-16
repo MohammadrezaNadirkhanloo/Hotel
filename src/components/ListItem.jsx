@@ -8,7 +8,7 @@ import useFetch from "../hook/useFetch";
 import Skeleton from "@mui/material/Skeleton";
 
 function ListItem() {
-  const { data, isLoading } = useFetch("https://mohammadrezanadirkhanloo.github.io/json-hotel/hotel.json", "");
+  const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");
   if (isLoading)
     <Box>
       <Skeleton animation="wave" width={150} height={20} />
