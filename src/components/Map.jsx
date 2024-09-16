@@ -50,7 +50,6 @@ function Map({ markdown }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <DetectClick />
         <ChangeCenter position={first} />
         {markdown.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
@@ -70,10 +69,4 @@ function ChangeCenter({ position }) {
   return null;
 }
 
-function DetectClick() {
-  const navigate = useNavigate();
-  useMapEvent({
-    click: (e) =>
-      navigate(`/Hotel/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
-  });
-}
+
