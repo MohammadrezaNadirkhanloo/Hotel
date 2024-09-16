@@ -1,15 +1,11 @@
-import { useBookmarkList } from "./context/ListBookmarkProvider";
-import * as React from "react";
+import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import ListItemText from "@mui/material/ListItemText";
 import ReactCountryFlag from "react-country-flag";
 import { Link } from "react-router-dom";
+import { useBookmarkList } from "./context/ListBookmarkProvider";
 
 function ItemsBookmark() {
   const { Bookmarks } = useBookmarkList();
