@@ -1,94 +1,201 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import { Container } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Modal from "@mui/material/Modal";
 import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import Daterange from "./Date";
-import DialogSelect from "./ui/DialogSelect";
-import InputWithIcon from "./ui/InputWithIcon";
-import {
-  createSearchParams,
-  Link,
-  Outlet,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import Filter from "./Filter";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 900,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Header() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [value, setValue] = useState(searchParams.get("value") || "");
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-      color: "green",
-    },
-  ]);
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
   const navigate = useNavigate();
 
-  const handelSearch = () => {
-    const encodeParams = createSearchParams({
-      date: JSON.stringify(date),
-      value,
-      options: JSON.stringify(options),
-    });
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
 
-    navigate({
-      pathname: "filter",
-      search: encodeParams.toString(),
-    });
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+    navigate("/Hotel");
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <>
       <AppBar position="static">
-        <Container>
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2, display: { xs: "block", md: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Box
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
               sx={{
-                flexGrow: 1,
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
               }}
             >
-              <InputWithIcon value={value} setValue={setValue} />
-              <Box>
-                <Daterange date={date} setDate={setDate} />
-              </Box>
-              <DialogSelect options={options} setOptions={setOptions} />
+              Hotel MR
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
-                aria-label="delete"
                 size="large"
-                onClick={handelSearch}
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                <SavedSearchIcon color="primary" fontSize="inherit" />
+                <MenuIcon />
               </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{ display: { xs: "block", md: "none" } }}
+              >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: "center" }}>Home</Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setAnchorElNav(null);
+                    navigate("bookmark");
+                  }}
+                >
+                  <Typography sx={{ textAlign: "center" }}>Bookmark</Typography>
+                </MenuItem>
+                <Button onClick={handleOpen}>Filter Hotel</Button>
+              </Menu>
             </Box>
-            <Link to="bookmark">boork</Link>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              Hotel MR
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Home
+              </Button>
+              <Button
+                onClick={() => {
+                  setAnchorElNav(null);
+                  navigate("bookmark");
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Bookmark
+              </Button>
+              <Button onClick={handleOpen}>Filter Hotel</Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Filter />
+                </Box>
+              </Modal>
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
+
       <Outlet />
-    </Box>
+    </>
   );
 }
