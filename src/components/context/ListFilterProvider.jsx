@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import useFetch from "../../hook/useFetch";
 
 const ListFilterContext = createContext();
+const BASE_URL = "http://localhost:5000";
 
 export default function ListFilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,7 +11,7 @@ export default function ListFilterProvider({ children }) {
   const filterNumber = JSON.parse(searchParams.get("options"))?.room;
 
   const { data: hotels, isLoading } = useFetch(
-    "http://localhost:5000/hotels",
+    `${BASE_URL}/hotels`,
     `host_location_like=${valueSearch || ""}&accommodates_gte=${
       filterNumber || 1
     }`
@@ -22,7 +23,6 @@ export default function ListFilterProvider({ children }) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useFilterHotel() {
   return useContext(ListFilterContext);
 }
