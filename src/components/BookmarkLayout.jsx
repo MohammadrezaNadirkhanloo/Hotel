@@ -1,11 +1,8 @@
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Map from "./Map";
-function BookmarkItem() {
-  const[searchParams,setSearchParams]=useSearchParams()
-  console.log(searchParams.get("lat"));
-  
+function BookmarkLayout() {
   return (
     <Container sx={{ mt: 4 }}>
       <Grid container>
@@ -20,4 +17,4 @@ function BookmarkItem() {
   );
 }
 
-export default BookmarkItem;
+export default BookmarkLayout;
