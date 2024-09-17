@@ -11,8 +11,8 @@ import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
-import { useAuth } from "./context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./context/AuthProvider";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);

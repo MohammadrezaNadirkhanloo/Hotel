@@ -5,7 +5,13 @@ import TextField from "@mui/material/TextField";
 export default function InputWithIcon({ value, setValue }) {
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
-      <Box sx={{ display: "flex", alignItems: "flex-end" ,justifyContent:"center"}}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "center",
+        }}
+      >
         <LocationOnIcon color="primary" sx={{ mr: 1, my: 0.5 }} />
         <TextField
           id="input-with-sx"
@@ -13,7 +19,7 @@ export default function InputWithIcon({ value, setValue }) {
           variant="standard"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          autoComplete='off'
+          autoComplete="off"
         />
       </Box>
     </Box>

@@ -5,7 +5,7 @@ import Map from "./Map";
 import { useFilterHotel } from "./context/ListFilterProvider";
 
 function AppLayout() {
-  const { hotels, isLoading } = useFilterHotel([]);
+  const { hotels } = useFilterHotel([]);
 
   return (
     <Container sx={{ mt: 4 }}>

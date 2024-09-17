@@ -1,6 +1,6 @@
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import useFetch from "../hook/useFetch";
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 function Item() {
   const { id } = useParams();

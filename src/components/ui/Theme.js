@@ -1,18 +1,16 @@
 import { createTheme } from "@mui/material";
 
 export const Theme = createTheme({
-    palette:{
-        mode:"dark",
-        primary:{
-            main:"#4caf50"
-        }
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#4caf50",
     },
-    components:{
-        
+  },
+  components: {},
+  typography: {
+    button: {
+      textTransform: "none",
     },
-    typography: {
-        button: {
-          textTransform: 'none'
-        }
-      }
-  });
+  },
+});

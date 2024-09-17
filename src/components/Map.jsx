@@ -2,15 +2,8 @@ import GpsFixedIcon from "@mui/icons-material/GpsFixed";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-  useMapEvent,
-} from "react-leaflet";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { useSearchParams } from "react-router-dom";
 import useGeoLocation from "../hook/useGeoLocation";
 
 function Map({ markdown }) {
@@ -68,5 +61,3 @@ function ChangeCenter({ position }) {
   map.setView(position);
   return null;
 }
-
-

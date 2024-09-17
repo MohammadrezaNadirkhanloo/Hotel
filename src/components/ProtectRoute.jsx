@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useAuth } from "./context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./context/AuthProvider";
 
 function ProtectRoute({ children }) {
   const { isAuthen } = useAuth();

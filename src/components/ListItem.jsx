@@ -3,9 +3,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid2";
+import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import useFetch from "../hook/useFetch";
-import Skeleton from "@mui/material/Skeleton";
 
 function ListItem() {
   const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");

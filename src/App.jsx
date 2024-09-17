@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import BookmarkLayout from "./components/BookmarkLayout";
+import AuthProvider from "./components/context/AuthProvider";
 import ListBookmarkProvider from "./components/context/ListBookmarkProvider";
 import ListFilterProvider from "./components/context/ListFilterProvider";
 import Header from "./components/Header";
@@ -10,11 +11,10 @@ import Item from "./components/Item";
 import ItemsBookmark from "./components/ItemsBookmark";
 import ListFilter from "./components/ListFilter";
 import ListItem from "./components/ListItem";
-import { Theme } from "./components/ui/Theme";
-import SingelBookmark from "./components/SingelBookmark";
 import Login from "./components/Login";
-import AuthProvider from "./components/context/AuthProvider";
 import ProtectRoute from "./components/ProtectRoute";
+import SingelBookmark from "./components/SingelBookmark";
+import { Theme } from "./components/ui/Theme";
 
 function App() {
   return (
