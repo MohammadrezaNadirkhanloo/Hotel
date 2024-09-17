@@ -1,8 +1,7 @@
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import IconButton from "@mui/material/IconButton";
-import * as React from "react";
 import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -48,16 +47,16 @@ function Filter() {
   return (
     <Box>
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
-        <Grid item md={4} xs={12} sx={{ textAlign: "center" }}>
+        <Grid item size={{ md: 4, xs: 12 }} sx={{ textAlign: "center" }}>
           <InputWithIcon value={value} setValue={setValue} />
         </Grid>
-        <Grid item md={4} xs={12} sx={{ textAlign: "center" }}>
+        <Grid item size={{ md: 4, xs: 12 }} sx={{ textAlign: "center" }}>
           <Daterange date={date} setDate={setDate} />
         </Grid>
-        <Grid item md={3} xs={12} sx={{ textAlign: "center" }}>
+        <Grid item size={{ md: 3, xs: 12 }} sx={{ textAlign: "center" }}>
           <DialogSelect options={options} setOptions={setOptions} />
         </Grid>
-        <Grid item md={1} xs={12} sx={{ textAlign: "center" }}>
+        <Grid item size={{ md: 1, xs: 12 }} sx={{ textAlign: "center" }}>
           <IconButton aria-label="delete" size="large" onClick={handelSearch}>
             <SavedSearchIcon color="primary" fontSize="inherit" />
           </IconButton>

@@ -9,10 +9,10 @@ function BookmarkLayout() {
   return (
     <Container sx={{ mt: 4 }}>
       <Grid container>
-        <Grid size={5}>
+        <Grid size={{ md: 5, xs: 12 }}>
           <Outlet />
         </Grid>
-        <Grid size={7}>
+        <Grid size={{ md: 7, xs: 12 }}>
           <Map markdown={Bookmarks} />
         </Grid>
       </Grid>
