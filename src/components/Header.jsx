@@ -16,6 +16,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { Outlet, useNavigate } from "react-router-dom";
 import Filter from "./Filter";
+import { useAuth } from "./context/AuthProvider";
 
 const style = {
   position: "absolute",
@@ -35,7 +36,7 @@ export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [open, setOpen] = React.useState(false);
-
+  const { isAuthen, logout } = useAuth();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -53,8 +54,9 @@ export default function Header() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    logout();
+    navigate("/Hotel");
   };
-
   return (
     <>
       <AppBar position="static">
@@ -115,7 +117,18 @@ export default function Header() {
                 >
                   <Typography sx={{ textAlign: "center" }}>Bookmark</Typography>
                 </MenuItem>
-                <Button onClick={handleOpen}>Filter Hotel</Button>
+                {isAuthen ? (
+                  <Button onClick={handleOpen}>Filter Hotel</Button>
+                ) : (
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorElNav(null);
+                      navigate("login");
+                    }}
+                  >
+                    <Typography sx={{ textAlign: "center" }}>Login</Typography>
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
             <Typography
@@ -152,7 +165,20 @@ export default function Header() {
               >
                 Bookmark
               </Button>
-              <Button onClick={handleOpen}>Filter Hotel</Button>
+              {isAuthen ? (
+                <Button onClick={handleOpen}>Filter Hotel</Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    setAnchorElNav(null);
+                    navigate("login");
+                  }}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Login
+                </Button>
+              )}
+
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -164,33 +190,35 @@ export default function Header() {
                 </Box>
               </Modal>
             </Box>
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>Logout</Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
+            {isAuthen ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            ) : null}
           </Toolbar>
         </Container>
       </AppBar>
