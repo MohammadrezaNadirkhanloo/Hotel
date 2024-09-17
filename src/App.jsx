@@ -12,29 +12,42 @@ import ListFilter from "./components/ListFilter";
 import ListItem from "./components/ListItem";
 import { Theme } from "./components/ui/Theme";
 import SingelBookmark from "./components/SingelBookmark";
+import Login from "./components/Login";
+import AuthProvider from "./components/context/AuthProvider";
+import ProtectRoute from "./components/ProtectRoute";
 
 function App() {
   return (
     <>
       <ThemeProvider theme={Theme}>
         <Toaster />
-        <ListFilterProvider>
-          <ListBookmarkProvider>
-            <Routes>
-              <Route path="/Hotel" element={<Header />}>
-                <Route index element={<ListItem />} />
-                <Route path="filter" element={<AppLayout />}>
-                  <Route index element={<ListFilter />} />
-                  <Route path=":id" element={<Item />} />
+        <AuthProvider>
+          <ListFilterProvider>
+            <ListBookmarkProvider>
+              <Routes>
+                <Route path="/Hotel" element={<Header />}>
+                  <Route index element={<ListItem />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="filter" element={<AppLayout />}>
+                    <Route index element={<ListFilter />} />
+                    <Route path=":id" element={<Item />} />
+                  </Route>
+                  <Route
+                    path="bookmark"
+                    element={
+                      <ProtectRoute>
+                        <BookmarkLayout />
+                      </ProtectRoute>
+                    }
+                  >
+                    <Route index element={<ItemsBookmark />} />
+                    <Route path=":id" element={<SingelBookmark />} />
+                  </Route>
                 </Route>
-                <Route path="bookmark" element={<BookmarkLayout />}>
-                  <Route index element={<ItemsBookmark />} />
-                  <Route path=":id" element={<SingelBookmark />} />
-                </Route>
-              </Route>
-            </Routes>
-          </ListBookmarkProvider>
-        </ListFilterProvider>
+              </Routes>
+            </ListBookmarkProvider>
+          </ListFilterProvider>
+        </AuthProvider>
       </ThemeProvider>
     </>
   );

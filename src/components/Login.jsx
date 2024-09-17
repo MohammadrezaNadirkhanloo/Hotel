@@ -20,7 +20,7 @@ function Login() {
   const [password, setPassword] = useState("1234");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const navigate = useNavigate();
-  const { isAuthen, login, logout } = useAuth();
+  const { isAuthen, login } = useAuth();
   const handelLogin = (e) => {
     e.preventDefault();
     if (email && password) login(email, password);
